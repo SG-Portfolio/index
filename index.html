@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stephen G. | Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="video-bg-container">
+    <video autoplay muted loop playsinline class="video-bg">
+      <source src="ressources/background.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+
+  <header class="main-header">
+    <div class="logo-container">
+      <img src="ressources/logo.png" alt="Stephen G." class="logo">
+    </div>
+    <button id="menu-toggle-btn" class="menu-toggle-btn">MENU</button>
+  </header>
+
+  <nav id="sub-navbar" class="sub-navbar">
+    <div class="sub-nav-links">
+      <button class="cat-btn" data-target="projets">Projets</button>
+      <button class="cat-btn" data-target="gallerie">Galerie</button>
+      <button class="cat-btn" data-target="profile">Profile</button>
+    </div>
+  </nav>
+
+  <div id="content-panel" class="content-panel">
+    <button id="close-panel-btn" class="close-panel-btn">&times;</button>
+    <div id="panel-inner-content" class="panel-inner-content">
+      </div>
+  </div>
+
+
+  <template id="tpl-projets">
+    <h2>Mes Projets Actuels</h2>
+    <div class="project-list">
+      <div class="project-card">
+        <h3>PLACE HOLDER</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <div class="project-card">
+        <h3>PLACE HOLDER</h3>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum..</p>
+      </div>
+      <div class="project-card">
+        <h3>Permis C App</h3>
+        <p>Application de révision et d'entraînement mobile pour l'examen du permis poids lourd, complétée à 80%.</p>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-gallerie">
+    <h2>Galerie & Médias</h2>
+    <p>Espace de démonstration visuelle (Work in progress)...</p>
+    </template>
+
+  <template id="tpl-profile">
+    
+    <h2>Profile</h2>
+    <div class="profile-card">
+    <p>Développeur Maker avec plus de 20 ans d'affinité avec l'informatique.</p>
+    <p>Spécialisé en Python, JavaScript, et l'écosystème IA local (LM Studio). J'ai mis mes pieds partout ou il as un aspect créatif ou sandbox.</p>
+    <p>De la Musique Assisté par Ordinateur à la confection de modéle 3D en passant par le dessin et le design, j'aimes l'art sous tous ses formats.</p>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>

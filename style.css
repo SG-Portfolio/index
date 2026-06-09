@@ -1,0 +1,241 @@
+/* --- 1. RESET & VARIABLES --- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #0b0b0b;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* --- 2. VIDÉO DE FOND FLOUTÉE ET SOMBRE --- */
+.video-bg-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;       /* Prend toute la largeur de l'écran */
+  height: 100vh;      /* Prend toute la hauteur de l'écran */
+  z-index: -2;        /* Se place tout au fond, derrière le texte et les menus */
+  overflow: hidden;
+}
+
+.video-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* Force la vidéo à remplir l'écran sans se déformer (comme un fond d'écran) */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* --- 🌌 LE VOILE SOMBRE ET FLOU --- */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2); /* Gère l'assombrissement (0.7 = 70% de noir) */
+  
+  /* L'effet de flou sur la vidéo */
+  backdrop-filter: blur(1px); 
+  -webkit-backdrop-filter: blur(1px); /* Sécurité pour Safari / iOS */
+  
+  transition: backdrop-filter 0.4s ease, background-color 0.4s ease;
+  z-index: -0; /* Se place juste au-dessus de la vidéo mais sous le texte */
+}
+
+/* Accentuation du flou quand un panneau de catégorie est ouvert */
+body.panel-active .video-overlay {
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+}
+
+/* --- 3. HEADER (Logo & Bouton Menu Épuré) --- */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  box-sizing: border-box;
+  background: transparent;
+  z-index: 1000;
+}
+
+.logo-container .logo {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+}
+
+.menu-toggle-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.menu-toggle-btn:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+/* --- 4. SOUS-NAVBAR DES CATÉGORIES (Sous le header) --- */
+.sub-navbar {
+  position: fixed;
+  top: 75px; /* Ajusté pour se caler juste sous ton header de 70px */
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  z-index: 995;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Affichage du sous-menu */
+.sub-navbar.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.sub-nav-links {
+  display: flex;
+  gap: 90px; /* Bel espacement large entre Projets, Galerie et Profile */
+  padding: 10px 20px;
+}
+
+.cat-btn {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  color: #ffffff !important;
+  font-family: 'Segoe UI', Arial, sans-serif !important;
+  font-size: 1.5rem !important; /* On l'agrandit un peu pour correspondre à la maquette */
+  font-weight: bold !important;
+  text-transform: capitalize;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease, transform 0.2s ease;
+  -webkit-appearance: none; /* Force la suppression du style iOS/Safari */
+  -moz-appearance: none;    /* Force la suppression du style Firefox */
+}
+
+.cat-btn:hover {
+  color: #75CC00 !important;
+  transform: scale(2);
+}
+
+/* --- 5. PANNEAU DE CONTENU (Glisse de bas en haut) --- */
+.content-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 70px); /* Prend toute la page sous le header */
+  background: transparent; /* Fond transparent pour profiter du flou de l'overlay */
+  z-index: 990;
+  transform: translateY(100%); /* Masqué en bas */
+  transition: transform 0.9s cubic-bezier(0.1, 0.76, 0.55, 0.94);
+  padding: 40px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.content-panel.open {
+  transform: translateY(0); /* Monte à l'écran */
+}
+
+.close-panel-btn {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.close-panel-btn:hover {
+  color: #ff4d4d;
+}
+
+.panel-inner-content {
+  max-width: 900px;
+  margin: 40px auto 0 auto; /* Centré dans la page */
+}
+
+.panel-inner-content h2 {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #75CC00;
+  padding-bottom: 10px;
+}
+
+/* Style cartes projets */
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.project-card {
+  background: rgba(29, 29, 29, 0.4);
+  border-left: 4px solid #75CC00;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.project-card h3 {
+  margin-top: 0;
+  color: #75CC00;
+}
+
+.profile-card {
+  background: rgba(29, 29, 29, 0.4);
+  border-left: 4px solid #75CC00;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+/* --- 6. RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+  .main-header { padding: 0 20px; }
+  .logo-container .logo { height: 24px; }
+  
+  .sub-nav-links {
+    gap: 20px; /* Plus serré sur mobile */
+  }
+  
+  .cat-btn {
+    font-size: 1rem;
+  }
+  
+  .content-panel {
+    background: rgba(29, 29, 29, 0.4);
+    padding: 20px;
+  }
+  
+  .close-panel-btn {
+    right: 20px;
+  }
+}
