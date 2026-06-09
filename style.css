@@ -47,7 +47,7 @@ body {
 
 /* Accentuation du flou quand un panneau de catégorie est ouvert */
 body.panel-active .video-overlay {
-  background-color: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.2); 
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
 }
